@@ -9,8 +9,8 @@ if [ ! -f /var/log/first_boot_done ]; then
     sudo yum install -y terraform
 
     su - ec2-user -c "
-        git clone https://github.com/joaqu1m/infra-orchestrator-example.git
-        cd ./infra-orchestrator-example/
+        git clone https://github.com/joaqu1m/infra-orchestrator.git
+        cd ./infra-orchestrator/
 
         ./terraform/scripts/modules-init.sh
     "
