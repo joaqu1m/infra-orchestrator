@@ -1,0 +1,11 @@
+name: infra-orchestrator
+version: '3.8'
+services:
+  devcontainer:
+    container_name: infra-orchestrator
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
