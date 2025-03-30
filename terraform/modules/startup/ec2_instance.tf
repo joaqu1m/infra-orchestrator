@@ -32,9 +32,6 @@ resource "aws_instance" "terraform_runner" {
   security_groups      = [aws_security_group.terraform_runner_sg.name]
   iam_instance_profile = aws_iam_instance_profile.terraform_runner_profile.name
 
-  // TODO: Setup automático da máquina com CI/CD para rodar terraform. Isso inclui possivelmente criar e instanciar um serviço com Jenkins
-  // Esperando aprovação do tema e definição do nome da org para prosseguir;
-
   tags = {
     Name        = "terraform-runner"
     Environment = "management"
