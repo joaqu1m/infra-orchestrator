@@ -27,7 +27,6 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/ec2_key.pem ec2-user@${{ secrets.EC2_IP_ADDRESS }} << 'EOF'
             cd ~/infra-orchestrator
             git pull
-            cd terraform
-            chmod +x scripts/modules-update.sh
-            ./scripts/modules-update.sh
+            chmod +x ./terraform/scripts/modules-update.sh
+            ./terraform/scripts/modules-update.sh
           EOF
