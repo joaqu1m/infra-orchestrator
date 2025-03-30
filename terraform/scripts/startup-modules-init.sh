@@ -25,7 +25,7 @@ cd ./terraform
 rm -rf ./terraform-state
 rm -rf ./.terraform
 rm -f ./.terraform.lock.hcl
-rm -f ./example-key.pem
+rm -f ./universal-key.pem
 
 mv ./modules.tf ./modules.txt
 

@@ -43,3 +43,12 @@ resource "aws_instance" "terraform_runner" {
 
   user_data = file("${path.module}/user_data.sh")
 }
+
+resource "aws_eip" "terraform_runner_eip" {
+  instance   = aws_instance.terraform_runner.id
+  depends_on = [aws_instance.terraform_runner]
+}
+
+output "terraform_runner_elastic_ip" {
+  value = aws_eip.terraform_runner_eip.public_ip
+}

@@ -1,4 +1,4 @@
-# Infrastructure Orchestrator Example
+# Infrastructure Orchestrator
 
 ## How to Rebuild the Infrastructure from Scratch
 

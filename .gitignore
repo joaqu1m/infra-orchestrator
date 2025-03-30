@@ -1,4 +1,4 @@
-example-key.pem
+universal-key.pem
 terraform-state
 .terraform**
 **.env

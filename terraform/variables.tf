@@ -3,7 +3,7 @@ variable "aws_region" {
 }
 
 variable "key_name" {
-  default = "example-key"
+  default = "universal-key"
 }
 
 variable "ami_id" {
