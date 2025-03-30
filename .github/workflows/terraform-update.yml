@@ -1,0 +1,33 @@
+name: Run Terraform Update on EC2
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'terraform/**'
+  workflow_dispatch:
+
+jobs:
+  ssh-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Create SSH private key file
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/ec2_key.pem
+          chmod 600 ~/.ssh/ec2_key.pem
+
+      - name: Update repository on EC2 and run terraform update script
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/ec2_key.pem ec2-user@${{ secrets.EC2_IP_ADDRESS }} << 'EOF'
+            cd ~/infra-orchestrator-example
+            git pull
+            cd terraform
+            chmod +x scripts/modules-update.sh
+            ./scripts/modules-update.sh
+          EOF
