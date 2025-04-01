@@ -60,6 +60,15 @@ resource "aws_eip" "n8n_eip" {
   depends_on = [aws_instance.n8n]
 }
 
-output "n8n_elastic_ip" {
-  value = aws_eip.n8n_eip.public_ip
+resource "aws_route53_record" "n8n_dns" {
+  count   = 1
+  zone_id = var.route53_zone_id
+  name    = var.domain_name
+  type    = "A"
+  ttl     = "300"
+  records = [aws_eip.n8n_eip.public_ip]
+}
+
+output "n8n_domain" {
+  value = var.domain_name
 }
