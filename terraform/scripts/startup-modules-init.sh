@@ -2,8 +2,8 @@
 
 set -e
 
-TEMP_DIR=$(mktemp -d -p . terraform-startup-XXXXXX)
-trap 'rm -rf ${TEMP_DIR}' EXIT
+TEMP_DIR=$(mktemp -d -p . ./terraform-startup-XXXXXX)
+trap 'cd .. && rm -rf ${TEMP_DIR}' EXIT
 
 rm -rf ~/.aws/
 mkdir ~/.aws/
@@ -28,8 +28,8 @@ cp -r ./terraform/modules ${TEMP_DIR}/
 
 cd ${TEMP_DIR}
 
-terraform init
-terraform apply -auto-approve
+# terraform init
+# terraform apply -auto-approve
 
-rm -f ../universal-key.pem
-cp -f ./universal-key.pem ../universal-key.pem
+rm -f ../terraform/universal-key.pem
+cp ./universal-key.pem ../terraform/universal-key.pem
