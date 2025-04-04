@@ -9,5 +9,5 @@ resource "aws_route53_zone" "iagiliza_zone" {
 }
 
 output "iagiliza_name_servers" {
-  value = aws_route53_zone.iagiliza_zone.id
+  value = aws_route53_zone.iagiliza_zone.name_servers
 }

@@ -6,8 +6,8 @@
    - Run this project in a DevContainer to simulate a Linux environment with all necessary libraries and isolated credentials
 
 2. **AWS Credentials Configuration**
-   - Add your AWS credentials to the `./terraform/aws.env` file
-   - A template file `aws.env.example` in the same directory is provided to show the required format
+   - Add your AWS credentials to the `./terraform/.aws.env` file
+   - A template file `.aws.env.example` in the same directory is provided to show the required format
    - Note: If you're working in a study lab environment, credentials may change after each restart
 
 3. **Infrastructure Initialization**
