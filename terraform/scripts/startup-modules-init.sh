@@ -14,10 +14,10 @@ region = us-east-1
 output = json
 EOL
 
-if [ -f ./terraform/aws.env ]; then
-    cat ./terraform/aws.env > ~/.aws/credentials
+if [ -f ./terraform/.aws.env ]; then
+    cat ./terraform/.aws.env > ~/.aws/credentials
 else
-    echo "Arquivo aws.env não encontrado. Por favor, crie o arquivo ./terraform/aws.env com suas credenciais AWS"
+    echo "Arquivo .aws.env não encontrado. Por favor, crie o arquivo ./terraform/.aws.env com suas credenciais AWS"
     exit 1
 fi
 
