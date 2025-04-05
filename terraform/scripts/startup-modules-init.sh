@@ -28,8 +28,8 @@ cp -r ./terraform/modules ${TEMP_DIR}/
 
 cd ${TEMP_DIR}
 
-# terraform init
-# terraform apply -auto-approve
+terraform init
+terraform apply -auto-approve
 
-rm -f ../terraform/universal-key.pem
-cp ./universal-key.pem ../terraform/universal-key.pem
+rm -f ../universal-key.pem
+cp ./universal-key.pem ../universal-key.pem
