@@ -2,7 +2,9 @@
 
 set -e
 
-TEMP_DIR=$(mktemp -d -p . ./terraform-startup-XXXXXX)
+cd ./terraform
+
+TEMP_DIR=$(mktemp -d -p . terraform-startup-XXXXXX)
 trap 'cd .. && rm -rf ${TEMP_DIR}' EXIT
 
 rm -rf ~/.aws/
@@ -21,15 +23,15 @@ else
     exit 1
 fi
 
-cp ./terraform/main.tf ${TEMP_DIR}/
-cp ./terraform/startup-modules.tf ${TEMP_DIR}/
-cp ./terraform/variables.tf ${TEMP_DIR}/
-cp -r ./terraform/modules ${TEMP_DIR}/
+cp ./main.tf ${TEMP_DIR}/
+cp ./startup-modules.tf ${TEMP_DIR}/
+cp ./variables.tf ${TEMP_DIR}/
+cp -r ./modules ${TEMP_DIR}/
 
 cd ${TEMP_DIR}
 
 terraform init
 terraform apply -auto-approve
 
-rm -f ../universal-key.pem
-cp ./universal-key.pem ../universal-key.pem
+rm -f ../../universal-key.pem
+cp ./universal-key.pem ../../universal-key.pem
