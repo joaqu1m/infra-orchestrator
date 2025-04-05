@@ -26,7 +26,7 @@ resource "aws_iam_instance_profile" "terraform_runner_profile" {
 }
 
 resource "aws_instance" "terraform_runner" {
-  instance_type        = "t3a.nano"
+  instance_type        = "t3a.micro"
   key_name             = aws_key_pair.terraform_runner_key.key_name
   ami                  = var.ami_id
   security_groups      = [aws_security_group.terraform_runner_sg.name]
