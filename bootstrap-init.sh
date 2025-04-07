@@ -2,11 +2,6 @@
 
 set -e
 
-cd ./terraform
-
-TEMP_DIR=$(mktemp -d -p . terraform-startup-XXXXXX)
-trap 'cd .. && rm -rf ${TEMP_DIR}' EXIT
-
 rm -rf ~/.aws/
 mkdir ~/.aws/
 
@@ -23,10 +18,19 @@ else
     exit 1
 fi
 
-cp ./main.tf ${TEMP_DIR}/
-cp ./startup-modules.tf ${TEMP_DIR}/
-cp ./variables.tf ${TEMP_DIR}/
-cp -r ./modules ${TEMP_DIR}/
+rm -f lambda_function.zip
+cd ./src
+GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o bootstrap
+chmod +x bootstrap
+chmod +x run-terraform.sh
+zip -j ../lambda_function.zip bootstrap run-terraform.sh
+cd ..
+
+TEMP_DIR=$(mktemp -d -p . bootstrap-setup-XXXXXX)
+trap 'cd .. && rm -rf ${TEMP_DIR}' EXIT
+
+cp ./bootstrap.tf ${TEMP_DIR}/main.tf
+cp ./lambda_function.zip ${TEMP_DIR}/lambda_function.zip
 
 cd ${TEMP_DIR}
 
