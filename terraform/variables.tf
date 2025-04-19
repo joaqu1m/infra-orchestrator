@@ -3,7 +3,7 @@ variable "aws_region" {
 }
 
 variable "key_name" {
-  default = "universal-key"
+  default = "iagiliza-universal-key"
 }
 
 variable "ami_id" {
