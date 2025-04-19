@@ -28,6 +28,9 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: "us-east-1"
 
+      - name: Change directory
+        run: cd terraform
+
       - name: Initialize Terraform
         run: terraform init
 
