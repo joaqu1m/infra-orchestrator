@@ -3,9 +3,7 @@ version: '3.8'
 services:
   devcontainer:
     container_name: infra-orchestrator
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: mcr.microsoft.com/devcontainers/base:bullseye
     volumes:
       - ../..:/workspaces:cached
     command: sleep infinity

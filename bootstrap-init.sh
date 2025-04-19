@@ -2,13 +2,6 @@
 
 set -e
 
-if [ $# -lt 1 ]; then
-    echo "Usage: $0 <aws_account_id>"
-    exit 1
-fi
-
-AWS_ACCOUNT_ID=$1
-
 rm -rf ~/.aws/
 mkdir ~/.aws/
 
@@ -25,25 +18,15 @@ else
     exit 1
 fi
 
-rm -f lambda_function.zip
-cd ./src
-GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o bootstrap
-chmod +x bootstrap
-chmod +x run-terraform.sh
-zip -j ../lambda_function.zip bootstrap run-terraform.sh
-rm -f bootstrap
-cd ..
-
 TEMP_DIR=$(mktemp -d -p . bootstrap-setup-XXXXXX)
 trap 'cd .. && rm -rf ${TEMP_DIR}' EXIT
 
 cp ./bootstrap.tf ${TEMP_DIR}/main.tf
-mv ./lambda_function.zip ${TEMP_DIR}/lambda_function.zip
 
 cd ${TEMP_DIR}
 
 terraform init
-terraform apply -auto-approve -var="aws_account_id=${AWS_ACCOUNT_ID}"
+terraform apply -auto-approve
 
 rm -f ../../universal-key.pem
 cp ./universal-key.pem ../../universal-key.pem
