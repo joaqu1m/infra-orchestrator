@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - 'terraform/**'
-      - '!terraform/bootstrap**'
 
 jobs:
   terraform:
