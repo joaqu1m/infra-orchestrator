@@ -28,5 +28,5 @@ cd ${TEMP_DIR}
 terraform init
 terraform apply -auto-approve
 
-rm -f ../../universal-key.pem
-cp ./universal-key.pem ../../universal-key.pem
+rm -f ../../iagiliza-universal-key.pem
+cp ./iagiliza-universal-key.pem ../../iagiliza-universal-key.pem
