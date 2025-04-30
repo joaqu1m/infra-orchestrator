@@ -1,4 +1,4 @@
-iagiliza-universal-key.pem
+default-key.pem
 terraform-state
 .terraform**
 **.env

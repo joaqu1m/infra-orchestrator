@@ -3,7 +3,7 @@ variable "aws_region" {
 }
 
 variable "key_name" {
-  default = "iagiliza-universal-key"
+  default = "default-key"
 }
 
 variable "ami_id" {
@@ -13,3 +13,5 @@ variable "ami_id" {
 variable "iam_role_id" {
   default = "LabRole"
 }
+
+variable "solution_name" {}

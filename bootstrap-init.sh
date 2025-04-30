@@ -22,11 +22,12 @@ TEMP_DIR=$(mktemp -d -p . bootstrap-setup-XXXXXX)
 trap 'cd .. && rm -rf ${TEMP_DIR}' EXIT
 
 cp ./bootstrap.tf ${TEMP_DIR}/main.tf
+cp ./terraform/terraform.tfvars ${TEMP_DIR}/terraform.tfvars
 
 cd ${TEMP_DIR}
 
 terraform init
 terraform apply -auto-approve
 
-rm -f ../iagiliza-universal-key.pem
-cp ./iagiliza-universal-key.pem ../iagiliza-universal-key.pem
+rm -f ../default-key.pem
+cp ./default-key.pem ../default-key.pem

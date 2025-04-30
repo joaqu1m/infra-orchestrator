@@ -2,9 +2,11 @@ provider "aws" {
   region = "us-east-1"
 }
 
+variable "solution_name" {}
+
 # Bucket
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "iagiliza-terraform-lock"
+  bucket = "${var.solution_name}-terraform-lock"
 
   lifecycle {
     prevent_destroy = true
@@ -38,7 +40,7 @@ resource "aws_s3_bucket_public_access_block" "terraform_state_public_access" {
 
 # DynamoDB Table
 resource "aws_dynamodb_table" "terraform_lock" {
-  name           = "iagiliza-terraform-lock"
+  name           = "${var.solution_name}-terraform-lock"
   billing_mode   = "PAY_PER_REQUEST"
   hash_key       = "LockID"
 
@@ -50,7 +52,7 @@ resource "aws_dynamodb_table" "terraform_lock" {
 
 # Default Keypair
 resource "aws_key_pair" "terraform_runner_key" {
-  key_name   = "iagiliza-universal-key"
+  key_name   = "default-key"
   public_key = tls_private_key.terraform_runner_tls.public_key_openssh
 }
 
@@ -61,6 +63,6 @@ resource "tls_private_key" "terraform_runner_tls" {
 
 resource "local_file" "terraform_runner_pem" {
   content         = tls_private_key.terraform_runner_tls.private_key_pem
-  filename        = "${path.root}/iagiliza-universal-key.pem"
+  filename        = "${path.root}/default-key.pem"
   file_permission = "0400"
 }
